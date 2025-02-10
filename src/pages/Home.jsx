@@ -18,6 +18,8 @@ import event14 from "../assets/14.jpg";
 import event15 from "../assets/15.jpg";
 import Loading from "./Loading";
 
+const eventTypes = ["All", "workshop", "tech_talk", "activity"];
+
 const imageMap = {
   1: event1,
   2: event2,
@@ -39,6 +41,7 @@ const imageMap = {
 export default function Home({ isAuthenticated }) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedType, setSelectedType] = useState("All"); // New state for filtering
 
   useEffect(() => {
     fetch(import.meta.env.VITE_LOCAL_API_URL)
@@ -56,7 +59,9 @@ export default function Home({ isAuthenticated }) {
   if (loading) return <Loading />;
 
   const filteredEvents = events.filter(
-    (event) => isAuthenticated || event.permission === "public" // Show all if logged in, otherwise only public events
+    (event) =>
+      (isAuthenticated || event.permission === "public") &&
+      (selectedType === "All" || event.event_type === selectedType)
   );
 
   const groupedEvents = filteredEvents.reduce((acc, event, onLogin) => {
@@ -76,6 +81,23 @@ export default function Home({ isAuthenticated }) {
   return (
     <div>
       <h1>Hack The North Events</h1>
+      <div className="mb-3">
+        <label htmlFor="event-filter" className="me-2">
+          Filter by Type:
+        </label>
+        <select
+          id="event-filter"
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+          className="p-2"
+        >
+          {eventTypes.map((type) => (
+            <option key={type} value={type}>
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </option>
+          ))}
+        </select>
+      </div>
       {Object.entries(groupedEvents).map(([date, events]) => (
         <div key={date} className="mb-4">
           <h2 className="text-primary">{date}</h2>
