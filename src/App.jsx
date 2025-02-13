@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import { useState } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/Login";

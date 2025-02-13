@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { StyledLoginForm } from "../styles/Login.styled";
 
 export function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -32,7 +32,7 @@ export function LoginForm({ onLogin }) {
   };
 
   return (
-    <form ref={formRef}>
+    <StyledLoginForm ref={formRef}>
       <div>
         <h1 className="h3">Login to your account</h1>
       </div>
@@ -68,6 +68,6 @@ export function LoginForm({ onLogin }) {
           Login
         </button>
       </div>
-    </form>
+    </StyledLoginForm>
   );
 }

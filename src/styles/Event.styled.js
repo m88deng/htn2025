@@ -1,31 +1,45 @@
 import styled from 'styled-components';
 
 export const StyledProjectCard = styled.div`
-    padding: 1.5rem 1rem 1rem;
     min-height: 100%;
-    height: 300px; /* Set a fixed height for the card */
+    height: 370px; 
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Ensure content is spaced evenly */
-    align-items: center; /* Center content horizontally */
+    justify-content: center; 
     text-align: center;
-    
-    .image-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 150px; /* Set a fixed height for the image container */
-    }
+    border-radius: 20px;
 
+    .card-body{
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    
     img {
         max-width: 100%;
         max-height: 100%; /* Ensure the image does not exceed the container height */
         height: auto;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        object-fit: contain; /* Ensure the image is contained within the container */
+        object-fit: cover; /* Ensure the image is contained within the container */
     }
+`;
+
+export const StyledEventImage = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "background"
+})`
+    display: block;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    height: 280px;   
+    background-image: url(${({ background }) => background});
+    background-blend-mode: color;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 `;
 
 export const StyledEventModal = styled.div`
@@ -43,11 +57,11 @@ export const StyledEventModal = styled.div`
     .modal-dialog {
       max-width: 75vw; /* Optional: Define a maximum width for the modal */
       width: 75vw; /* Ensure it takes up the full available width within max-width */
-      height: auto; /* Adjust height as needed */
+      height: 68vh; /* Adjust height as needed */
       background: white; /* Ensure modal content has a background */
       border-radius: 8px; /* Optional: Add border radius */
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
-      margin-top: 10rem;
+      margin-top: 6rem;
     }
 
     .modal-body {
@@ -55,11 +69,12 @@ export const StyledEventModal = styled.div`
       flex-direction: column;
       align-items: center;
       text-align: center;
+      height: 100%;
       padding: 1rem; /* Add padding to the modal body */
     }
     .modal-content{
       width: 100%;
-      height: 50vh;
+      height: 100%;
     }
 
     .modal-body img {

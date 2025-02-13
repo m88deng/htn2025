@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import { StyledEventModal } from "../styles/StyledEventCard";
+import { StyledEventModal } from "../styles/Event.styled";
 
 import image from "../assets/1.jpg";
 
@@ -21,7 +21,7 @@ export default function EventModal({ showModal, onClose, event }) {
     };
 
     const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (!event.target.closest(".modal-content")) {
         handleClose();
       }
     };
@@ -49,8 +49,8 @@ export default function EventModal({ showModal, onClose, event }) {
     >
       <StyledEventModal ref={nodeRef}>
         <div className="modal d-block" tabIndex={-1} role="dialog">
-          <div className="modal-dialog" ref={modalRef}>
-            <div className="modal-content">
+          <div className="modal-dialog">
+            <div className="modal-content" ref={modalRef}>
               <div className="modal-header d-flex justify-content-between align-items-center">
                 <h5 className="modal-title">Modal title</h5>
                 <button

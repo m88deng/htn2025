@@ -6,6 +6,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  --white: #fcfcfc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -35,6 +36,13 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
+    sans-serif;
+}
+
+h2 {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
+    sans-serif;
 }
 
 button {
@@ -44,16 +52,48 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  border-radius: 8px !important;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.swiper-pagination {
+  bottom: -3px !important; /* Adjusts distance */
+}
+
+/* Ensure navigation buttons are visible */
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  color: white !important;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adjust icon size */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 24px !important;
+  font-weight: bold !important;
+}
+
+/* Ensure buttons don't get hidden */
+.swiper-button-disabled {
+  opacity: 0.5 !important; /* Keep it visible */
+  pointer-events: auto !important;
 }
 
 @media (prefers-color-scheme: light) {
@@ -67,54 +107,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
-
-.horizontal-scroll {
-  display: flex;
-  width: 80vw;
-  overflow-x: auto;
-  padding: 10px 0;
-  gap: 15px; /* Adds space between event cards */
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-.horizontal-scroll > div {
-  flex: 0 0 auto;
-  width: 370px; /* Adjust width as needed */
-  height: 280px;
-  scroll-snap-align: start;
-}
-
-.horizontal-scroll::-webkit-scrollbar {
-  height: 3px;
-}
-
-.horizontal-scroll::-webkit-scrollbar-thumb {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-.horizontal-scroll::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.thumbnails {
-  position: absolute;
-  bottom: 8px;
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-}
-
-.thumbnails div {
-  width: 8px;
-  height: 8px;
-  cursor: pointer;
-  background: #aaa;
-  border-radius: 100%;
-}
-
-.thumbnails div.highlighted {
-  background-color: #777;
 }

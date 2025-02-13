@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyledProjectCard } from "../styles/StyledEventCard";
+import { StyledEventImage, StyledProjectCard } from "../styles/Event.styled";
 import EventModal from "./EventModal";
 
 export default function EventCard({
@@ -10,51 +10,32 @@ export default function EventCard({
   speakers,
   image,
 }) {
-  const [showModal, setShowModal] = useState(false);
-  const handleShowModal = () => {
-    setShowModal(true);
-  };
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
   return (
     <>
-      <StyledProjectCard
-        className="card my-3 shadow-sm"
-        onClick={handleShowModal}
-      >
+      <StyledProjectCard className="card my-4 shadow-sm">
         <div className="card-body">
-          <h5 className="card-title">{name}</h5>
-          <h6 className="card-subtitle mb-2 text-muted">Type: {event_type}</h6>
           {image && (
-            <div
-              className="text-center"
-              style={{ height: "150px", width: "225px" }}
+            <StyledEventImage
+              background={image}
+              className="text-center image-container"
             >
-              <img
+              {/* <img
                 src={image}
                 alt={name}
                 className="img-fluid mb-3"
                 style={{ height: "150px", objectFit: "cover" }}
-              />
-            </div>
+              /> */}
+            </StyledEventImage>
           )}
-          <p>
+          <h5 className="card-title">{name}</h5>
+          {/* <h6 className="card-subtitle mb-2 text-muted">Type: {event_type}</h6> */}
+
+          {/* <p>
             <strong>Start:</strong> {new Date(start_time).toLocaleString()}
-          </p>
-          <p>
             <strong>End:</strong> {new Date(end_time).toLocaleString()}
-          </p>
-          {speakers.length > 0 && (
-            <p>
-              <strong>Speakers:</strong>{" "}
-              {speakers.map((s) => s.name).join(", ")}
-            </p>
-          )}
+          </p> */}
         </div>
       </StyledProjectCard>
-      <EventModal showModal={showModal} onClose={handleCloseModal} />
     </>
   );
 }

@@ -1,9 +1,10 @@
 import { LoginForm } from "../components/LoginForm";
-import { StyledLoginPage } from "../styles/StyledLogin";
+import { StyledLoginPage } from "../styles/Login.styled";
+import picture from "../assets/tree.png";
 
 export default function Login({ onLogin }) {
   return (
-    <StyledLoginPage>
+    <StyledLoginPage background={picture}>
       <LoginForm onLogin={onLogin} />
     </StyledLoginPage>
   );

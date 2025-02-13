@@ -1,4 +1,4 @@
-import { StyledHeader } from "../styles/StyledHeader";
+import { StyledHeader } from "../styles/Header.styled";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
