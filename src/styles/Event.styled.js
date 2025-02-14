@@ -32,9 +32,20 @@ export const StyledEventImage = styled.div.withConfig({
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     width: inherit;
-    display: flex;
-    justify-content: center;
     height: 280px;   
+    background-image: url(${({ background }) => background});
+    background-blend-mode: color;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+`;
+export const StyledModalImage = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "background"
+})`
+    display: block;
+    border-radius: 20px;
+    width: 100%;
+    height: 260px;   
     background-image: url(${({ background }) => background});
     background-blend-mode: color;
     background-position: 50% 50%;
@@ -55,8 +66,8 @@ export const StyledEventModal = styled.div`
     align-items: center;
 
     .modal-dialog {
-      max-width: 75vw; /* Optional: Define a maximum width for the modal */
-      width: 75vw; /* Ensure it takes up the full available width within max-width */
+      max-width: 70vw; /* Optional: Define a maximum width for the modal */
+      width: 70vw; /* Ensure it takes up the full available width within max-width */
       height: 68vh; /* Adjust height as needed */
       background: white; /* Ensure modal content has a background */
       border-radius: 8px; /* Optional: Add border radius */
@@ -77,15 +88,31 @@ export const StyledEventModal = styled.div`
       height: 100%;
     }
 
-    .modal-body img {
+    .modal-body {
       max-width: 100%;
       height: auto;
       margin-bottom: 1rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    
-    .fade-enter {
+
+    .event-info{
+      padding: 2rem;
+      border-radius: 20px;
+      background-color: lightblue;
+    }
+
+    .event-url{
+      padding: 0.8rem;
+      border-radius: 20px;
+      background-color: lavender;
+    }
+
+    a{
+      text-decoration: none;
+    }
+
+    /* .fade-enter {
     opacity: 0;
     }
     .fade-enter-active {
@@ -113,5 +140,5 @@ export const StyledEventModal = styled.div`
     .modal-fade-exit-active {
       opacity: 0;
       transition: opacity 300ms;
-    }
+    } */
 `;

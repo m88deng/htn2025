@@ -39,7 +39,6 @@ export function LoginForm({ onLogin }) {
 
       <div>
         <div>
-          <label>Username</label>
           <input
             id="email"
             type="text"
@@ -52,7 +51,6 @@ export function LoginForm({ onLogin }) {
         </div>
 
         <div>
-          <label>Password</label>
           <input
             id="password"
             type="password"

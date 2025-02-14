@@ -123,19 +123,6 @@ export default function Home({ isAuthenticated }) {
           ))}
         </select>
       </div>
-      {/* {Object.entries(groupedEvents).map(([date, events]) => (
-        <div key={date} className="mb-4">
-          <h2 className="text-primary">{date}</h2>
-          <div className="d-flex gap-2 horizontal-scroll py-3">
-            {events.map((event) => (
-              <div key={event.id}>
-                <EventCard {...event} image={imageMap[event.id]} />
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-       */}
       {Object.entries(groupedEvents).map(([date, events]) => (
         <div key={date}>
           <h2 className="text-primary mt-4">{date}</h2>
@@ -166,6 +153,8 @@ export default function Home({ isAuthenticated }) {
               showModal={showModal}
               onClose={closeModal}
               event={selectedEvent}
+              image={imageMap[selectedEvent.id]}
+              isAuthenticated={isAuthenticated}
             />
           )}
         </div>

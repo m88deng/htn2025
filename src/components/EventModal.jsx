@@ -1,10 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import { StyledEventModal } from "../styles/Event.styled";
+import { StyledModalImage, StyledEventModal } from "../styles/Event.styled";
+import EventRoundedIcon from "@mui/icons-material/EventRounded";
+import ScheduleRoundedIcon from "@mui/icons-material/ScheduleRounded";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 
-import image from "../assets/1.jpg";
-
-export default function EventModal({ showModal, onClose, event }) {
+export default function EventModal({
+  showModal,
+  onClose,
+  event,
+  image,
+  isAuthenticated,
+}) {
   const [inProp, setInProp] = useState(showModal);
   const nodeRef = useRef(null);
   const modalRef = useRef(null);
@@ -39,6 +47,50 @@ export default function EventModal({ showModal, onClose, event }) {
     setTimeout(onClose, 300);
   };
 
+  const formatEventDay = (start) => {
+    const formattedDate = new Date(start).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    return formattedDate;
+  };
+
+  const formatEventTime = (start, end) => {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    const formattedStartTime = startDate.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+    const formattedEndTime = endDate.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+    return `${formattedStartTime} - ${formattedEndTime}`;
+  };
+
+  const formatEventType = (type) => {
+    return (type || "")
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const getSpeakerNames = () => {
+    return event.speakers.map((speaker) => speaker.name).join(", ");
+  };
+
+  const getEventURL = () => {
+    const url = isAuthenticated ? event.private_url : event.public_url;
+    return url;
+  };
+
   return (
     <CSSTransition
       in={inProp}
@@ -51,26 +103,84 @@ export default function EventModal({ showModal, onClose, event }) {
         <div className="modal d-block" tabIndex={-1} role="dialog">
           <div className="modal-dialog">
             <div className="modal-content" ref={modalRef}>
-              <div className="modal-header d-flex justify-content-between align-items-center">
-                <h5 className="modal-title">Modal title</h5>
+              <div
+                className="modal-header d-flex justify-content-between align-items-center"
+                style={{ height: 60 }}
+              >
+                <h1 className="modal-title" style={{ fontSize: 26 }}>
+                  {event.name}
+                </h1>
                 <button
+                  className="d-flex justify-content-center align-items-center"
                   type="button"
-                  className="close"
-                  onClick={onClose} // Manually close modal
+                  style={{ width: 38, height: 38 }}
+                  onClick={onClose}
                 >
-                  <span>&times;</span>
+                  <span style={{ display: "block", fontSize: 20 }}>
+                    &times;
+                  </span>
                 </button>
               </div>
               <div className="modal-body">
-                <div
-                  className="text-center"
-                  style={{ height: "150px", width: "225px" }}
-                >
-                  <img
-                    src={image}
-                    className="img-fluid mb-3"
-                    style={{ height: "150px", objectFit: "cover" }}
-                  />
+                <div className="container">
+                  <div className="row">
+                    <div className="col-6">
+                      <div
+                        className="d-flex flex-column justify-content-between"
+                        style={{ height: 260 }}
+                      >
+                        <div className="d-flex flex-column gap-2 event-info">
+                          <div className="d-flex flex-row justify-content-between align-item-center">
+                            <div className="d-flex flex-row align-item-center gap-2">
+                              <EventRoundedIcon />
+                              <div>Day</div>
+                            </div>
+                            <div>{formatEventDay(event.start_time)}</div>
+                          </div>
+                          <div className="d-flex flex-row justify-content-between align-item-center">
+                            <div className="d-flex flex-row align-item-center gap-2">
+                              <ScheduleRoundedIcon />
+                              <div>Time</div>
+                            </div>
+                            <div>
+                              {formatEventTime(
+                                event.start_time,
+                                event.end_time
+                              )}
+                            </div>
+                          </div>
+                          <div className="d-flex flex-row justify-content-between align-item-center">
+                            <div className="d-flex flex-row align-item-center gap-2">
+                              <AutoAwesomeRoundedIcon />
+                              <div>Type</div>
+                            </div>
+                            <div>{formatEventType(event.event_type)}</div>
+                          </div>
+                          <div className="d-flex flex-row justify-content-between align-item-center">
+                            <div className="d-flex flex-row align-item-center gap-2">
+                              <PersonRoundedIcon />
+                              <div>Speakers</div>
+                            </div>
+                            <div>{getSpeakerNames()}</div>
+                          </div>
+                          <div style={{ backgroundColor: "green" }}></div>
+                        </div>
+                        <div className="mt-2 event-url" onClick={getEventURL}>
+                          <a href={getEventURL()} target="blank">
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6">
+                      <StyledModalImage background={image} />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12">
+                      <p>{event.description}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

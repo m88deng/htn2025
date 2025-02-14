@@ -28,12 +28,6 @@ export default function EventCard({
             </StyledEventImage>
           )}
           <h5 className="card-title">{name}</h5>
-          {/* <h6 className="card-subtitle mb-2 text-muted">Type: {event_type}</h6> */}
-
-          {/* <p>
-            <strong>Start:</strong> {new Date(start_time).toLocaleString()}
-            <strong>End:</strong> {new Date(end_time).toLocaleString()}
-          </p> */}
         </div>
       </StyledProjectCard>
     </>
