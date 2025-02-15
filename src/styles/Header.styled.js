@@ -10,4 +10,5 @@ export const StyledHeader = styled.div`
     justify-content: space-between;
     z-index: 20;
     background-color: var(--white);
+    top: 0;
 `;
