@@ -105,7 +105,7 @@ export default function Home({ isAuthenticated }) {
   return (
     <StyledHome>
       <div className="d-flex flex-row justify-content-between align-items-center">
-        <h1>Hack The North Events</h1>
+        <h1>Hackathon Global Events</h1>
         <div className="mb-3 d-flex justify-content-center align-items-center">
           {/* <label htmlFor="event-filter" className="me-2">
             Filter by Type:
