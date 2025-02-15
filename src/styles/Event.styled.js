@@ -190,6 +190,7 @@ export const StyledEventModal = styled.div`
     }
 
     .event-related{
+      color: black;
       padding: 0.4rem 0.7rem;
       background-color: lavender;
       border-radius: 5px;
