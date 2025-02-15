@@ -5,6 +5,7 @@ import EventRoundedIcon from "@mui/icons-material/EventRounded";
 import ScheduleRoundedIcon from "@mui/icons-material/ScheduleRounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+import LightbulbRoundedIcon from "@mui/icons-material/LightbulbRounded";
 
 export default function EventModal({
   showModal,
@@ -12,8 +13,11 @@ export default function EventModal({
   event,
   image,
   isAuthenticated,
+  relatedEvents,
 }) {
   const [inProp, setInProp] = useState(showModal);
+  const [currentEvent, setCurrentEvent] = useState(event); // Track current event displayed in the modal
+
   const nodeRef = useRef(null);
   const modalRef = useRef(null);
 
@@ -83,12 +87,19 @@ export default function EventModal({
   };
 
   const getSpeakerNames = () => {
-    return event.speakers.map((speaker) => speaker.name).join(", ");
+    return currentEvent.speakers.map((speaker) => speaker.name).join(", ");
   };
 
   const getEventURL = () => {
-    const url = isAuthenticated ? event.private_url : event.public_url;
+    const url = isAuthenticated
+      ? currentEvent.private_url
+      : currentEvent.public_url;
     return url;
+  };
+
+  // Handle related event click to update the modal content
+  const handleRelatedEventClick = (relatedEvent) => {
+    setCurrentEvent(relatedEvent); // Update the modal to show the related event's details
   };
 
   return (
@@ -100,7 +111,11 @@ export default function EventModal({
       nodeRef={nodeRef}
     >
       <StyledEventModal ref={nodeRef}>
-        <div className="modal d-block" tabIndex={-1} role="dialog">
+        <div
+          className="modal d-flex justify-content-center"
+          tabIndex={-1}
+          role="dialog"
+        >
           <div className="modal-dialog">
             <div className="modal-content" ref={modalRef}>
               <div
@@ -108,7 +123,7 @@ export default function EventModal({
                 style={{ height: 60 }}
               >
                 <h1 className="modal-title" style={{ fontSize: 26 }}>
-                  {event.name}
+                  {currentEvent.name}
                 </h1>
                 <button
                   className="d-flex justify-content-center align-items-center"
@@ -124,18 +139,15 @@ export default function EventModal({
               <div className="modal-body">
                 <div className="container">
                   <div className="row">
-                    <div className="col-6">
-                      <div
-                        className="d-flex flex-column justify-content-between"
-                        style={{ height: 260 }}
-                      >
+                    <div className="col col-lg-6">
+                      <div className="d-flex flex-column justify-content-between event-left">
                         <div className="d-flex flex-column gap-2 event-info">
                           <div className="d-flex flex-row justify-content-between align-item-center">
                             <div className="d-flex flex-row align-item-center gap-2">
                               <EventRoundedIcon />
                               <div>Day</div>
                             </div>
-                            <div>{formatEventDay(event.start_time)}</div>
+                            <div>{formatEventDay(currentEvent.start_time)}</div>
                           </div>
                           <div className="d-flex flex-row justify-content-between align-item-center">
                             <div className="d-flex flex-row align-item-center gap-2">
@@ -144,8 +156,8 @@ export default function EventModal({
                             </div>
                             <div>
                               {formatEventTime(
-                                event.start_time,
-                                event.end_time
+                                currentEvent.start_time,
+                                currentEvent.end_time
                               )}
                             </div>
                           </div>
@@ -154,7 +166,9 @@ export default function EventModal({
                               <AutoAwesomeRoundedIcon />
                               <div>Type</div>
                             </div>
-                            <div>{formatEventType(event.event_type)}</div>
+                            <div>
+                              {formatEventType(currentEvent.event_type)}
+                            </div>
                           </div>
                           <div className="d-flex flex-row justify-content-between align-item-center">
                             <div className="d-flex flex-row align-item-center gap-2">
@@ -176,17 +190,37 @@ export default function EventModal({
                         </div>
                       </div>
                     </div>
-                    <div className="col-6">
+                    <div className="col-lg-6">
                       <StyledModalImage background={image} />
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-12">
                       <p className="mt-4 event-description">
-                        {event.description}
+                        {currentEvent.description}
                       </p>
                     </div>
                   </div>
+
+                  {relatedEvents.length > 0 && (
+                    <div className="d-flex align-items event-related-container">
+                      <div className="d-flex align-items-center gap-1">
+                        <LightbulbRoundedIcon style={{ marginRight: "8px" }} />
+                        <div>Related</div>
+                      </div>
+
+                      {relatedEvents.map((relatedEvent) => (
+                        <div
+                          className="event-related"
+                          style={{ fontWeight: 500 }}
+                          key={relatedEvent.id}
+                          onClick={() => handleRelatedEventClick(relatedEvent)}
+                        >
+                          {relatedEvent.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

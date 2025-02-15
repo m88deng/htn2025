@@ -163,6 +163,9 @@ export default function Home({ isAuthenticated }) {
                 event={selectedEvent}
                 image={imageMap[selectedEvent.id]}
                 isAuthenticated={isAuthenticated}
+                relatedEvents={events.filter((e) =>
+                  selectedEvent.related_events.includes(e.id)
+                )}
               />
             )}
           </div>

@@ -9,4 +9,5 @@ export const StyledHeader = styled.div`
     flex-direction: row;
     justify-content: space-between;
     z-index: 20;
+    background-color: var(--white);
 `;

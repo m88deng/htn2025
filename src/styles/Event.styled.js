@@ -17,11 +17,11 @@ export const StyledProjectCard = styled.div`
     
     img {
         max-width: 100%;
-        max-height: 100%; /* Ensure the image does not exceed the container height */
+        max-height: 100%;
         height: auto;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        object-fit: cover; /* Ensure the image is contained within the container */
+        object-fit: cover; 
     }
 `;
 
@@ -51,6 +51,10 @@ export const StyledModalImage = styled.div.withConfig({
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
+
+    @media screen and (max-width: 992px) {
+      display: none;
+  }
 `;
 
 export const StyledEventModal = styled.div`
@@ -59,19 +63,20 @@ export const StyledEventModal = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Dimming effect */
-    z-index: 1050; /* Ensures modal is on top of other content */
-    display: flex; /* Flex to center content */
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1050; 
+    display: flex; 
     justify-content: center;
     align-items: center;
 
     .modal-dialog {
-      max-width: 70vw; /* Optional: Define a maximum width for the modal */
-      width: 70vw; /* Ensure it takes up the full available width within max-width */
-      height: 68vh; /* Adjust height as needed */
-      background: white; /* Ensure modal content has a background */
-      border-radius: 8px; /* Optional: Add border radius */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+      max-width: 900px; 
+      width: 70vw;
+      height: 70vh; 
+      max-height: 680px;
+      background: white; 
+      border-radius: 8px; 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
       margin-top: 6rem;
     }
 
@@ -82,6 +87,7 @@ export const StyledEventModal = styled.div`
       text-align: center;
       height: 100%;
       padding: 1rem; /* Add padding to the modal body */
+      padding-bottom: 2rem;
     }
     .modal-content{
       width: 100%;
@@ -91,11 +97,74 @@ export const StyledEventModal = styled.div`
     .modal-body {
       max-width: 100%;
       height: auto;
-      margin-bottom: 1rem;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow-y: auto; /* Enable scrolling */
+      max-height: 100%; /* Prevent overflow outside the modal */
     }
 
+    /* Specific styles for smaller screens */
+    @media screen and (max-width: 583px) {
+      .modal-dialog {
+        width: 88vw;
+        max-width: 100%; /* Use full width on small screens */
+        height: auto; /* Allow height to adjust automatically */
+        margin-top: 4rem;
+      }
+
+      .modal-header{
+        height: 20% !important;
+      }
+
+      .modal-body {
+        max-height: 100%; /* Allow scrolling inside the body */
+        padding: 0.5rem;
+        padding-bottom: 1.5rem !important;
+        overflow-y: auto; /* Ensure scrolling inside modal body */
+      }
+
+      /* Optional: Adjust the height of modal content if needed */
+      .modal-content {
+        height: 100%;
+      }
+      .event-related-container{
+        flex-direction: column;
+        row-gap: 0.5rem !important;
+        justify-content: center !important;
+      }   
+    }
+    @media screen and (max-width: 420px) {
+      .modal-dialog {
+        width: 88vw;
+        max-width: 100%; /* Use full width on small screens */
+        height: auto; /* Allow height to adjust automatically */
+        margin-top: 2rem;
+      }
+
+      .modal-header{
+        height: 25% !important;
+      }
+
+      .modal-body {
+        max-height: 100%; /* Allow scrolling inside the body */
+        padding: 0.5rem;
+      }
+
+      /* Optional: Adjust the height of modal content if needed */
+      .modal-content {
+        height: 100%;
+      }
+
+      .event-related-container{
+        flex-direction: column;
+        row-gap: 0.5rem !important;
+        justify-content: center !important;
+      }   
+    }
+
+    .event-left{
+      height: 260px;
+    }
     .event-info{
       padding: 2rem;
       border-radius: 20px;
@@ -104,8 +173,24 @@ export const StyledEventModal = styled.div`
 
     .event-url{
       padding: 0.8rem;
-      border-radius: 20px;
+      border-radius: 10px;
       background-color: lavender;
+    }
+
+    .event-related-container{
+      display: flex;
+      column-gap: 1rem;
+    }
+
+    .event-related{
+      padding: 0.4rem 0.7rem;
+      background-color: lavender;
+      border-radius: 5px;
+    }
+
+    .event-related:hover{
+      color: var(--blue);
+      cursor: pointer;
     }
 
     a{
@@ -116,33 +201,14 @@ export const StyledEventModal = styled.div`
       text-align: left;
     }
 
-    /* .fade-enter {
-    opacity: 0;
-    }
-    .fade-enter-active {
-      opacity: 1;
-      transition: opacity 300ms ease-in-out;
-    }
-    .fade-exit {
-      opacity: 1;
-    }
-    .fade-exit-active {
-      opacity: 0;
-      transition: opacity 300ms ease-in-out;
-    }
-
-    .modal-fade-enter {
-      opacity: 0;
-    }
-    .modal-fade-enter-active {
-      opacity: 1;
-      transition: opacity 300ms;
-    }
-    .modal-fade-exit {
-      opacity: 1;
-    }
-    .modal-fade-exit-active {
-      opacity: 0;
-      transition: opacity 300ms;
-    } */
+    @media screen and (max-width: 768px) {
+      .event-info{
+        padding: 1rem;
+      }
+      .event-left{
+        height: 100%;
+        justify-content: start !important;
+      }
+    
+    } 
 `;
