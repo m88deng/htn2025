@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { StyledLoginForm } from "../styles/Login.styled";
+import { StyledLoginPage, StyledLoginForm } from "../styles/Login.styled";
 
 export function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -34,52 +34,55 @@ export function LoginForm({ onLogin }) {
   };
 
   return (
-    <StyledLoginForm ref={formRef}>
-      <div>
-        <h1 className="h3 text-center">Login to your account</h1>
-      </div>
-
-      <p className="small mt-3 text-center">Login to see all private events.</p>
-      <div>
+    <StyledLoginPage>
+      <StyledLoginForm ref={formRef}>
         <div>
-          <input
-            id="email"
-            type="text"
-            className={`form-control mt-3 ${showError ? "error" : ""}`}
-            placeholder="Username"
-            required
-            value={username}
-            onChange={handleUsername}
-          />
-        </div>
-
-        <div className="position-relative text-center">
-          <input
-            id="password"
-            type="password"
-            className={`form-control mt-2 ${showError ? "error" : ""}`}
-            placeholder="Password"
-            required
-            value={password}
-            onChange={handlePassword}
-          />
-          {showError && (
-            <div className="error-message mt-1">
-              <p className="small">Invalid username or password</p>
+          <h1 className="h3 text-center">Login to your account</h1>
+          <p className="small mt-3 text-center">
+            Login to see all private events.
+          </p>
+          <div>
+            <div>
+              <input
+                id="email"
+                type="text"
+                className={`form-control mt-3 ${showError ? "error" : ""}`}
+                placeholder="Username"
+                required
+                value={username}
+                onChange={handleUsername}
+              />
             </div>
-          )}
-        </div>
 
-        <div className="text-center mt-3">
-          <button
-            className="mt-3 login-button"
-            type="submit"
-            onClick={handleLogin}
-          >
-            Login
-          </button>
+            <div className="position-relative text-center">
+              <input
+                id="password"
+                type="password"
+                className={`form-control mt-2 ${showError ? "error" : ""}`}
+                placeholder="Password"
+                required
+                value={password}
+                onChange={handlePassword}
+              />
+              {showError && (
+                <div className="error-message mt-1">
+                  <p className="small">Invalid username or password</p>
+                </div>
+              )}
+            </div>
+
+            <div className="text-center mt-3">
+              <button
+                className="mt-3 login-button"
+                type="submit"
+                onClick={handleLogin}
+              >
+                Login
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </StyledLoginForm>
+      </StyledLoginForm>
+    </StyledLoginPage>
   );
 }

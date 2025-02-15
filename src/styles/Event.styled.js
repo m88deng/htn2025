@@ -74,7 +74,8 @@ export const StyledEventModal = styled.div`
       width: 70vw;
       height: 70vh; 
       max-height: 680px;
-      background: white; 
+      background-color: var(--modal-bg-color);
+      color: var(--modal-text-color);
       border-radius: 8px; 
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
       margin-top: 6rem;
@@ -88,6 +89,7 @@ export const StyledEventModal = styled.div`
       height: 100%;
       padding: 1rem; /* Add padding to the modal body */
       padding-bottom: 2rem;
+      background-color: var(--modal-bg-color);
     }
     .modal-content{
       width: 100%;
@@ -97,10 +99,13 @@ export const StyledEventModal = styled.div`
     .modal-body {
       max-width: 100%;
       height: auto;
-      border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       overflow-y: auto; /* Enable scrolling */
       max-height: 100%; /* Prevent overflow outside the modal */
+    }
+
+    .modal-header {
+      background-color: var(--modal-bg-color);
     }
 
     /* Specific styles for smaller screens */
@@ -114,6 +119,7 @@ export const StyledEventModal = styled.div`
 
       .modal-header{
         height: 20% !important;
+        background-color: var(--modal-bg-color);
       }
 
       .modal-body {
@@ -143,6 +149,7 @@ export const StyledEventModal = styled.div`
 
       .modal-header{
         height: 25% !important;
+        background-color: var(--modal-bg-color);
       }
 
       .modal-body {
@@ -168,7 +175,7 @@ export const StyledEventModal = styled.div`
     .event-info{
       padding: 2rem;
       border-radius: 20px;
-      background-color: #f7f7f7;
+      background-color: var(--modal-bg-color);
     }
 
     .event-url{

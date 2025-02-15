@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
-import { StyledModalImage, StyledEventModal } from "../styles/Event.styled";
+import { StyledEventModal, StyledModalImage } from "../styles/Event.styled";
 import EventRoundedIcon from "@mui/icons-material/EventRounded";
 import ScheduleRoundedIcon from "@mui/icons-material/ScheduleRounded";
-import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import LightbulbRoundedIcon from "@mui/icons-material/LightbulbRounded";
 
 export default function EventModal({

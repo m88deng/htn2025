@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 import { StyledHeader } from "../styles/Header.styled";
 import { useNavigate } from "react-router-dom";
 
 export default function Header({ isAuthenticated, onLogout }) {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [scrolled, setScrolled] = useState(false);
 
   const handleLoginNavigation = () => {
@@ -30,13 +32,19 @@ export default function Header({ isAuthenticated, onLogout }) {
 
   return (
     <StyledHeader className={scrolled ? "scrolled" : ""}>
-      <button onClick={handleHomeNavigation}>Home</button>
-
-      {!isAuthenticated ? (
-        <button onClick={handleLoginNavigation}>Login</button>
-      ) : (
-        <button onClick={onLogout}>Logout</button>
-      )}
+      <div className="left-buttons">
+        <button onClick={handleHomeNavigation}>Home</button>
+      </div>
+      <div className="right-buttons">
+        {!isAuthenticated ? (
+          <button onClick={handleLoginNavigation}>Login</button>
+        ) : (
+          <button onClick={onLogout}>Logout</button>
+        )}
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === "light" ? "Dark Mode" : "Light Mode"}
+        </button>
+      </div>
     </StyledHeader>
   );
 }
