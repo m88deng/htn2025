@@ -166,7 +166,11 @@ export default function EventModal({
                           <div style={{ backgroundColor: "green" }}></div>
                         </div>
                         <div className="mt-2 event-url" onClick={getEventURL}>
-                          <a href={getEventURL()} target="blank">
+                          <a
+                            href={getEventURL()}
+                            target="blank"
+                            style={{ color: "black" }}
+                          >
                             Learn More
                           </a>
                         </div>
@@ -178,7 +182,9 @@ export default function EventModal({
                   </div>
                   <div className="row">
                     <div className="col-12">
-                      <p>{event.description}</p>
+                      <p className="mt-4 event-description">
+                        {event.description}
+                      </p>
                     </div>
                   </div>
                 </div>

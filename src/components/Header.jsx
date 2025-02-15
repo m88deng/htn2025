@@ -1,7 +1,7 @@
 import { StyledHeader } from "../styles/Header.styled";
 import { useNavigate } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ isAuthenticated, onLogout }) {
   const navigate = useNavigate();
 
   const handleLoginNavigation = () => {
@@ -14,7 +14,13 @@ export default function Header() {
   return (
     <StyledHeader>
       <button onClick={handleHomeNavigation}>Home</button>
-      <button onClick={handleLoginNavigation}>Login</button>
+
+      {/* Conditionally render the login/logout button */}
+      {!isAuthenticated ? (
+        <button onClick={handleLoginNavigation}>Login</button>
+      ) : (
+        <button onClick={onLogout}>Logout</button>
+      )}
     </StyledHeader>
   );
 }

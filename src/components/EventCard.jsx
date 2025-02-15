@@ -18,16 +18,9 @@ export default function EventCard({
             <StyledEventImage
               background={image}
               className="text-center image-container"
-            >
-              {/* <img
-                src={image}
-                alt={name}
-                className="img-fluid mb-3"
-                style={{ height: "150px", objectFit: "cover" }}
-              /> */}
-            </StyledEventImage>
+            />
           )}
-          <h5 className="card-title">{name}</h5>
+          <h5 className="card-title pt-3">{name}</h5>
         </div>
       </StyledProjectCard>
     </>

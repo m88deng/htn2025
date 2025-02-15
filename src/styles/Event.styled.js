@@ -99,7 +99,7 @@ export const StyledEventModal = styled.div`
     .event-info{
       padding: 2rem;
       border-radius: 20px;
-      background-color: lightblue;
+      background-color: #f7f7f7;
     }
 
     .event-url{
@@ -110,6 +110,10 @@ export const StyledEventModal = styled.div`
 
     a{
       text-decoration: none;
+    }
+
+    .event-description{
+      text-align: left;
     }
 
     /* .fade-enter {

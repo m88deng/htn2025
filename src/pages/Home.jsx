@@ -68,7 +68,7 @@ export default function Home({ isAuthenticated }) {
 
   useEffect(() => {
     // fetch("/api/events")
-    fetch(import.meta.env.VITE_LOCAL_API_URL)
+    fetch("http://localhost:4000/api/events")
       .then((response) => response.json())
       .then((data) => {
         setEvents(data);

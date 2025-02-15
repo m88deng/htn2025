@@ -9,8 +9,8 @@ import Loading from "./pages/Loading";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleLogin = () => {
-    setIsAuthenticated(true);
+  const handleLogin = (isAuthenticated) => {
+    setIsAuthenticated(isAuthenticated);
   };
 
   const handleLogout = () => {
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />

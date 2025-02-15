@@ -28,7 +28,6 @@ export function LoginForm({ onLogin }) {
       console.log("Logged in");
       navigate("/");
     } else {
-      onLogin(false);
       setShowError(true);
       console.log("Invalid credentials");
     }
