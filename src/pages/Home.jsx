@@ -67,8 +67,8 @@ export default function Home({ isAuthenticated }) {
   };
 
   useEffect(() => {
-    // fetch("http://localhost:4000/api/events")
-    fetch("/api/events")
+    // fetch("/api/events")
+    fetch("http://localhost:4000/api/events")
       .then((response) => response.json())
       .then((data) => {
         setEvents(data);
@@ -139,9 +139,13 @@ export default function Home({ isAuthenticated }) {
               modules={[Navigation, Pagination, Scrollbar, A11y]}
               spaceBetween={50}
               slidesPerView={3}
-              navigation={groupedEvents[date].length > 3}
+              navigation={false}
               loop={groupedEvents[date].length > 3}
               pagination={{ clickable: true }}
+              breakpoints={{
+                0: { slidesPerView: 1 }, // Show 1 event on small screens
+                900: { slidesPerView: 3 }, // Show 3 events on larger screens
+              }}
               onSwiper={(swiper) => console.log(swiper)}
               onSlideChange={() => console.log("slide change")}
             >
