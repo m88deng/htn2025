@@ -30,4 +30,22 @@ export const StyledLoginForm = styled.form`
     box-shadow: 2px 6px 32px -5px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 2px 6px 32px -5px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 2px 6px 32px -5px rgba(0, 0, 0, 0.2);    
+    
+    .error-message{
+        position: absolute;
+        top: 100%;
+        color: red;
+    }
+
+    .error{
+        border: solid 1px red;
+    }
+
+    .login-button{
+        width: 100% !important;
+        transition: 300ms ease;
+    }
+    .login-button:hover{
+        background-color: var(--blue);
+    }
 `;

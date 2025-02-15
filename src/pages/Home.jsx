@@ -18,6 +18,7 @@ import event13 from "../assets/13.jpg";
 import event14 from "../assets/14.jpg";
 import event15 from "../assets/15.jpg";
 import Loading from "./Loading";
+import FilterAltRoundedIcon from "@mui/icons-material/FilterAltRounded";
 import { StyledHome } from "../styles/Home.styled";
 
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -66,7 +67,8 @@ export default function Home({ isAuthenticated }) {
   };
 
   useEffect(() => {
-    fetch("/api/events")
+    // fetch("/api/events")
+    fetch(import.meta.env.VITE_LOCAL_API_URL)
       .then((response) => response.json())
       .then((data) => {
         setEvents(data);
@@ -102,63 +104,70 @@ export default function Home({ isAuthenticated }) {
 
   return (
     <StyledHome>
-      <h1>Hack The North Events</h1>
-      <div className="mb-3 d-flex justify-content-center align-items-center">
-        <label htmlFor="event-filter" className="me-2">
-          Filter by Type:
-        </label>
-        <select
-          id="event-filter"
-          value={selectedType}
-          onChange={(e) => setSelectedType(e.target.value)}
-          className="p-2"
-        >
-          {eventTypes.map((type) => (
-            <option key={type} value={type}>
-              {type
-                .split("_")
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-                .join(" ")}
-            </option>
-          ))}
-        </select>
-      </div>
-      {Object.entries(groupedEvents).map(([date, events]) => (
-        <div key={date}>
-          <h2 className="text-primary mt-4">{date}</h2>
-          <Swiper
-            key={`${date}Events`}
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
-            spaceBetween={50}
-            slidesPerView={3}
-            navigation={groupedEvents[date].length > 3}
-            loop={groupedEvents[date].length > 3}
-            pagination={{ clickable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
+      <div className="d-flex flex-row justify-content-between align-items-center">
+        <h1>Hack The North Events</h1>
+        <div className="mb-3 d-flex justify-content-center align-items-center">
+          {/* <label htmlFor="event-filter" className="me-2">
+            Filter by Type:
+          </label> */}
+          <FilterAltRoundedIcon />
+          <select
+            id="event-filter"
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+            className="p-2"
           >
-            {events.map((event) => (
-              <SwiperSlide
-                key={event.id}
-                onClick={() => {
-                  openModal(event);
-                }}
-              >
-                <EventCard {...event} image={imageMap[event.id]} />
-              </SwiperSlide>
+            {eventTypes.map((type) => (
+              <option key={type} value={type}>
+                {type
+                  .split("_")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+                  .join(" ")}
+              </option>
             ))}
-          </Swiper>
-          {selectedEvent && (
-            <EventModal
-              showModal={showModal}
-              onClose={closeModal}
-              event={selectedEvent}
-              image={imageMap[selectedEvent.id]}
-              isAuthenticated={isAuthenticated}
-            />
-          )}
+          </select>
         </div>
-      ))}
+      </div>
+      {Object.keys(groupedEvents).length === 0 ? (
+        <p className="text-center text-gray-500 mt-4">No events found.</p>
+      ) : (
+        Object.entries(groupedEvents).map(([date, events]) => (
+          <div key={date}>
+            <h2 className="mt-4">{date}</h2>
+            <Swiper
+              key={`${date}Events`}
+              modules={[Navigation, Pagination, Scrollbar, A11y]}
+              spaceBetween={50}
+              slidesPerView={3}
+              navigation={groupedEvents[date].length > 3}
+              loop={groupedEvents[date].length > 3}
+              pagination={{ clickable: true }}
+              onSwiper={(swiper) => console.log(swiper)}
+              onSlideChange={() => console.log("slide change")}
+            >
+              {events.map((event) => (
+                <SwiperSlide
+                  key={event.id}
+                  onClick={() => {
+                    openModal(event);
+                  }}
+                >
+                  <EventCard {...event} image={imageMap[event.id]} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            {selectedEvent && (
+              <EventModal
+                showModal={showModal}
+                onClose={closeModal}
+                event={selectedEvent}
+                image={imageMap[selectedEvent.id]}
+                isAuthenticated={isAuthenticated}
+              />
+            )}
+          </div>
+        ))
+      )}
     </StyledHome>
   );
 }
