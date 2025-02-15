@@ -67,8 +67,8 @@ export default function Home({ isAuthenticated }) {
   };
 
   useEffect(() => {
-    // fetch("/api/events")
-    fetch("http://localhost:4000/api/events")
+    // fetch("http://localhost:4000/api/events")
+    fetch("/api/events")
       .then((response) => response.json())
       .then((data) => {
         setEvents(data);
